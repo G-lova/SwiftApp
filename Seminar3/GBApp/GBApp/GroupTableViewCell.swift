@@ -1,8 +1,8 @@
 //
-//  CustomTableViewCell.swift
-//  Seminar2
+//  GroupTableViewCell.swift
+//  GBApp
 //
-//  Created by User on 20.12.2023.
+//  Created by User on 30.12.2023.
 //
 
 import UIKit

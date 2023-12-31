@@ -1,8 +1,8 @@
 //
-//  Friend.swift
-//  Seminar3
+//  Photo.swift
+//  GBApp
 //
-//  Created by User on 26.12.2023.
+//  Created by User on 30.12.2023.
 //
 
 import Foundation

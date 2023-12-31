@@ -1,8 +1,8 @@
 //
 //  NetworkService.swift
-//  Seminar3
+//  GBApp
 //
-//  Created by User on 26.12.2023.
+//  Created by User on 30.12.2023.
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import Foundation
 final class NetworkService {
     
     func getFriendsData(token: String?, userID: String?) {
-        guard let url = URL(string: "https://api.vk.com/method/friends.get?access_token=\(token)&user_id=\(userID)&order=name&v=5.199") else {
+        guard let token = token, let userID = userID, let url = URL(string: "https://api.vk.com/method/friends.get?access_token=\(token)&user_id=\(userID)&order=name&v=5.199") else {
             return
         }
         URLSession.shared.dataTask(with: url) {(data, response, error) in
@@ -23,7 +23,7 @@ final class NetworkService {
             }
             print(response)
             do {
-                let friends = try JSONDecoder().decode([Friend].self, from: data)
+                let friends = try JSONDecoder().decode(Friend.self, from: data)
                 print(friends)
             } catch {
                 print(error)
@@ -32,7 +32,7 @@ final class NetworkService {
     }
     
     func getGroupsData(token: String?, userID: String?) {
-        guard let url = URL(string: "https://api.vk.com/method/groups.get?access_token=\(token)&user_id=\(userID)&v=5.199") else {
+        guard let token = token, let userID = userID, let url = URL(string: "https://api.vk.com/method/groups.get?access_token=\(token)&user_id=\(userID)&v=5.199") else {
             return
         }
         URLSession.shared.dataTask(with: url) {(data, response, error) in
@@ -45,7 +45,7 @@ final class NetworkService {
             }
             print(response)
             do {
-                let groups = try JSONDecoder().decode([Group].self, from: data)
+                let groups = try JSONDecoder().decode(Group.self, from: data)
                 print(groups)
             } catch {
                 print(error)
@@ -54,7 +54,7 @@ final class NetworkService {
     }
     
     func getPhotosData(token: String?, userID: String?) {
-        guard let url = URL(string: "https://api.vk.com/method/photos.getAll?access_token=\(token)&owner_id=\(userID)&v=5.199") else {
+        guard let token = token, let userID = userID, let url = URL(string: "https://api.vk.com/method/photos.getAll?access_token=\(token)&owner_id=\(userID)&v=5.199") else {
             return
         }
         URLSession.shared.dataTask(with: url) {(data, response, error) in
@@ -67,7 +67,7 @@ final class NetworkService {
             }
             print(response)
             do {
-                let photos = try JSONDecoder().decode([Photo].self, from: data)
+                let photos = try JSONDecoder().decode(Photo.self, from: data)
                 print(photos)
             } catch {
                 print(error)

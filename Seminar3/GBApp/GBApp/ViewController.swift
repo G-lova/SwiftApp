@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  Seminar2
+//  GBApp
 //
-//  Created by User on 19.12.2023.
+//  Created by User on 30.12.2023.
 //
 
 import UIKit
@@ -19,10 +19,10 @@ class ViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        view.backgroundColor = .white
+        view.addSubview(webView)
         guard let url = URL(string: "https://oauth.vk.com/authorize?client_id=51821877&redirect_uri=https://oauth.vk.com/blank.html&display=mobile&scope=friends,photos,groups&response_type=token") else {return}
         let request = URLRequest(url: url)
         webView.load(request)
-        view.addSubview(webView)
         
     }
 
@@ -96,5 +96,3 @@ class ViewController: UIViewController, WKNavigationDelegate {
         return layout
     }
 }
-
-

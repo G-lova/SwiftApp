@@ -1,8 +1,8 @@
 //
 //  FriendsViewController.swift
-//  Seminar2
+//  GBApp
 //
-//  Created by User on 19.12.2023.
+//  Created by User on 30.12.2023.
 //
 
 import UIKit
