@@ -35,7 +35,7 @@ final class NetworkService {
     }
     
     func getGroupsData(completion: @escaping ([GroupsItems]) -> Void) {
-        guard let url = URL(string: "https://api.vk.com/method/groups.get?access_token=\(token)&user_id=\(userID)&extended=1&fields=name&v=5.199") else {
+        guard let url = URL(string: "https://api.vk.com/method/groups.get?access_token=\(token)&user_id=\(userID)&extended=1&fields=name,description,photo_50&v=5.199") else {
             return
         }
         URLSession.shared.dataTask(with: url) {(data, response, error) in
@@ -76,6 +76,19 @@ final class NetworkService {
             } catch {
                 print(error)
             }
+        }.resume()
+    }
+    
+    func getImage(urlString: String) {
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        URLSession.shared.dataTask(with: url) {(data, response, error) in
+            guard let data = data else {
+                return
+            }
+            print(data)
+            print(response)
         }.resume()
     }
     

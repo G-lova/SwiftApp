@@ -25,4 +25,5 @@ struct FriendItems: Codable {
     var last_name: String
     var can_access_closed: Bool
     var is_closed: Bool
+    var photo_50: String
 }

@@ -24,6 +24,6 @@ struct GroupsItems: Codable {
     var is_closed: Int8
     var type: String
     var photo_50: String
-    var photo_100: String
-    var photo_200: String
+//    var photo_100: String
+//    var photo_200: String
 }
