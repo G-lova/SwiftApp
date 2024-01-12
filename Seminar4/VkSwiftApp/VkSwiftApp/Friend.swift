@@ -19,11 +19,11 @@ struct ResponseFriends: Codable {
 struct FriendItems: Codable {
     var id: Int
 //    var lists:[Int]
-    var track_code: String
+//    var track_code: String
     var online: Int8
     var first_name: String
     var last_name: String
-    var can_access_closed: Bool
-    var is_closed: Bool
+//    var can_access_closed: Bool
+//    var is_closed: Bool
     var photo_50: String
 }

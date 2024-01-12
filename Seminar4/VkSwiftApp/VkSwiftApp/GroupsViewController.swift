@@ -14,6 +14,7 @@ class GroupsViewController: UITableViewController {
     
     var groups: [GroupsItems] = []
     
+    var networkService = GroupsNetworkService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,7 @@ class GroupsViewController: UITableViewController {
         //navigationController?.navigationBar.prefersLargeTitles = true
         tabBarItem.title = "Groups"
         tableView.register(GroupTableViewCell.self, forCellReuseIdentifier: "groupCell")
-        let networkService = NetworkService()
+        
         networkService.token = token
         networkService.userID = userID
         networkService.getGroupsData { [weak self] groups in
@@ -48,7 +49,7 @@ extension GroupsViewController {
     override func tableView(_ tableView:UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell") as! GroupTableViewCell
         let group = groups[indexPath.row]
-        cell.setup(nameGroup: group.name, description: group.description, photo_50: group.photo_50)
+        cell.setup(nameGroup: group.name, description: group.description)
         return cell
     }
 }

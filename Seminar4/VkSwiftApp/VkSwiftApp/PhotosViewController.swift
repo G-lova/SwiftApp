@@ -12,7 +12,7 @@ class PhotosViewController: UICollectionViewController {
     var token: String = ""
     var userID: String = ""
 
-    private let reuseIdentifier = "Cell"
+    private let reuseIdentifier = "photoCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +39,6 @@ class PhotosViewController: UICollectionViewController {
     
         return cell
     }
-
-    
 
 }
 

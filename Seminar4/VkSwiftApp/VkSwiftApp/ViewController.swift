@@ -44,8 +44,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
             }
         let token = params["access_token"]
         let userID = params["user_id"]
-        print(token)
-        print(userID)
+//        print(token)
+//       print(userID)
         decisionHandler(.cancel)
         webView.removeFromSuperview()
         let tabBarController = UITabBarController()

@@ -13,5 +13,9 @@ struct Photo: Codable {
 
 struct ResponsePhotos: Codable {
     var count: Int
-    var items: [Int]
+    var items: [PhotoItems]
+}
+
+struct PhotoItems: Codable {
+    var url: String
 }

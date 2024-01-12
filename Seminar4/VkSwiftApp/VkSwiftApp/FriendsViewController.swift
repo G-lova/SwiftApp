@@ -7,59 +7,51 @@
 
 import UIKit
 
-class FriendsViewController: UIViewController {
+class FriendsViewController: UITableViewController {
     
     var token: String = ""
     var userID: String = ""
     
-    private let tableView = UITableView(frame: .zero, style: .plain)
-
+    var networkService = NetworkService()
+    
+    var friends: [FriendItems] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         title = "Friends"
-        //navigationController?.navigationBar.prefersLargeTitles = true
         tabBarItem.title = "Friends"
-        view.addSubview(tableView)
-        setupConstraints()
-        tableView.dataSource = self
-        tableView.delegate = self
         
-        let networkService = NetworkService()
+        tableView.register(FriendTableViewCell.self, forCellReuseIdentifier: "friendCell")
+        
+        setupNetworkService()
+    }
+    
+    func setupNetworkService() {
         networkService.token = token
         networkService.userID = userID
-        networkService.getFriendsData()
+        networkService.getFriendsData() { [weak self] friends in
+            self?.friends = friends
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
     
-    private func setupConstraints() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
-    }
-
-}
-
-extension FriendsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        friends.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = "Name"
-        cell.imageView?.image = UIImage(systemName: "circle")
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as! FriendTableViewCell
+//        guard let cell = cell as? CustomTableViewCell else {
+//            return UITableViewCell()
+//        }
+        let friend = friends[indexPath.row]
+        cell.setup(firstName: friend.first_name, lastName: friend.last_name, online: friend.online)
         return cell
     }
-    
+
 }
 
-
-extension FriendsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        UITableView.automaticDimension
-    }
-}
