@@ -10,10 +10,7 @@ import UIKit
 
 class GroupTableViewCell: UITableViewCell {
     
-    private var picView: UIImageView {
-        let picView = UIImageView(image: UIImage(systemName: "circle"))
-        return picView
-    }
+    private var picView: UIImageView
     
     private var nameLabel: UILabel = {
         let label = UILabel()
@@ -31,26 +28,20 @@ class GroupTableViewCell: UITableViewCell {
     private var stackViewHorizontal: UIStackView
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        picView = UIImageView(image: UIImage(systemName: "circle"))
         stackViewVertical = UIStackView(arrangedSubviews: [nameLabel, descriptionLabel])
-        stackViewHorizontal = UIStackView(arrangedSubviews: [stackViewVertical])
+        stackViewHorizontal = UIStackView(arrangedSubviews: [picView, stackViewVertical])
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        setupView()
         contentView.addSubview(picView)
         setupStackViewVertical()
         setupStackViewHorizontal()
-//        setupConstraints()
+        setupConstraints()
         
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    private func setupView() {
-//        contentView.addSubview(nameLabel)
-//        contentView.addSubview(descriptionLabel)
-//        contentView.addSubview(picView)
-//    }
     
     private func setupStackViewVertical() {
         stackViewVertical.axis = .vertical
@@ -68,11 +59,10 @@ class GroupTableViewCell: UITableViewCell {
     
     
     private func setupConstraints() {
+        
         stackViewVertical.translatesAutoresizingMaskIntoConstraints = false
         stackViewHorizontal.translatesAutoresizingMaskIntoConstraints = false
         picView.translatesAutoresizingMaskIntoConstraints = false
-//        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-//        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackViewVertical.leadingAnchor.constraint(equalTo: picView.trailingAnchor, constant: 10),
             stackViewHorizontal.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -82,11 +72,6 @@ class GroupTableViewCell: UITableViewCell {
 //            picView.widthAnchor.constraint(equalTo: picView.heightAnchor),
             picView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             picView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-//            nameLabel.leadingAnchor.constraint(equalTo: picView.trailingAnchor, constant: 10),
-//            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            descriptionLabel.leadingAnchor.constraint(equalTo: picView.trailingAnchor, constant: 10),
-//            descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
-//            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 

@@ -32,9 +32,8 @@ class GroupsViewController: UITableViewController {
                 self?.tableView.reloadData()
             }
         }
-        
     }
-
+    
 }
 
 extension GroupsViewController {
