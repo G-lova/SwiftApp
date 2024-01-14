@@ -22,7 +22,6 @@
 		CE93AF8F2B47065E00E0E8E8 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93AF8E2B47065E00E0E8E8 /* Friend.swift */; };
 		CE93AF922B4706A300E0E8E8 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93AF912B4706A300E0E8E8 /* Group.swift */; };
 		CE93AF952B4706D900E0E8E8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93AF942B4706D900E0E8E8 /* Photo.swift */; };
-		CEE9A5182B51A04A001613E1 /* GroupsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9A5172B51A045001613E1 /* GroupsNetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +42,6 @@
 		CE93AF8E2B47065E00E0E8E8 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		CE93AF912B4706A300E0E8E8 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		CE93AF942B4706D900E0E8E8 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		CEE9A5172B51A045001613E1 /* GroupsNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsNetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +84,6 @@
 				CE93AF852B47056100E0E8E8 /* PhotosViewController.swift */,
 				CE93AF882B4705B800E0E8E8 /* PhotoCollectionViewCell.swift */,
 				CE93AF8B2B47061300E0E8E8 /* NetworkService.swift */,
-				CEE9A5172B51A045001613E1 /* GroupsNetworkService.swift */,
 				CE93AF8E2B47065E00E0E8E8 /* Friend.swift */,
 				CE93AF912B4706A300E0E8E8 /* Group.swift */,
 				CE93AF942B4706D900E0E8E8 /* Photo.swift */,
@@ -174,7 +171,6 @@
 				CE93AF682B46F61400E0E8E8 /* AppDelegate.swift in Sources */,
 				CE93AF8C2B47061300E0E8E8 /* NetworkService.swift in Sources */,
 				CE41606F2B502B3C00DA4157 /* FriendTableViewCell.swift in Sources */,
-				CEE9A5182B51A04A001613E1 /* GroupsNetworkService.swift in Sources */,
 				CE93AF832B4704AE00E0E8E8 /* GroupTableViewCell.swift in Sources */,
 				CE93AF862B47056100E0E8E8 /* PhotosViewController.swift in Sources */,
 				CE93AF8F2B47065E00E0E8E8 /* Friend.swift in Sources */,

@@ -30,7 +30,29 @@ final class NetworkService {
         }.resume()
     }
     
-    func getPhotosData() {
+func getGroupsData(groupCompletion: @escaping ([GroupsItems]) -> Void) {
+    guard let url = URL(string: "https://api.vk.com/method/groups.get?access_token=\(token)&user_id=\(userID)&extended=1&fields=name,description,photo_50&v=5.199") else {
+        return
+    }
+    URLSession.shared.dataTask(with: url) {(data, response, error) in
+        guard let data = data else {
+            return
+        }
+//            guard let response = response as? HTTPURLResponse else {
+//                return
+//            }
+        do {
+            let groups = try JSONDecoder().decode(Group.self, from: data)
+            print(groups)
+            groupCompletion(groups.response.items)
+            
+        } catch {
+            print(error)
+        }
+    }.resume()
+}
+    
+    func getPhotosData(photoCompletion: @escaping ([PhotoItems]) -> Void) {
         guard let url = URL(string: "https://api.vk.com/method/photos.get?access_token=\(token)&owner_id=\(userID)&album_id=wall&v=5.199") else {
             return
         }
@@ -46,6 +68,7 @@ final class NetworkService {
             do {
                 let photos = try JSONDecoder().decode(Photo.self, from: data)
                 print(photos)
+                photoCompletion(photos.response.items)
             } catch {
                 print(error)
             }
@@ -60,6 +83,18 @@ final class NetworkService {
             DispatchQueue.main.async {
                 completion(data, error)
             }
+        }.resume()
+    }
+    
+    func getPhotoImage(photoUrl: String) {
+        guard let url = URL(string: photoUrl) else {
+            return
+        }
+        URLSession.shared.dataTask(with: url) {(data, response, error) in
+            guard let data = data else {
+                return
+            }
+            print(data)
         }.resume()
     }
     

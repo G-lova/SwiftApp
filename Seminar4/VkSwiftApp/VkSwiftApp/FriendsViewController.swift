@@ -49,7 +49,7 @@ class FriendsViewController: UITableViewController {
 //            return UITableViewCell()
 //        }
         let friend = friends[indexPath.row]
-        cell.setup(firstName: friend.first_name, lastName: friend.last_name, online: friend.online)
+        cell.setup(firstName: friend.first_name, lastName: friend.last_name, online: friend.online, photo_50: friend.photo_50)
         return cell
     }
 

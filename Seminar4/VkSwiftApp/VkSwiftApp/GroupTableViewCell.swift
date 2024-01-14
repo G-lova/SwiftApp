@@ -75,14 +75,16 @@ class GroupTableViewCell: UITableViewCell {
         ])
     }
 
-    func setup(nameGroup: String, description: String?) {
+    func setup(nameGroup: String, description: String?, photo_50: String) {
         nameLabel.text = nameGroup
         guard let description = description else { return }
         descriptionLabel.text = description
 //        guard let photo_50 = photo_50 else { return }
-//        let url = URL(string: photo_50)
-//        if let data = try? Data(contentsOf: url!) {
-//            picView.image = UIImage(data: data)
-//        }
+        let url = URL(string: photo_50)
+        if let data = try? Data(contentsOf: url!) {
+            picView.image = UIImage(data: data)
+            picView.layer.cornerRadius = picView.bounds.width
+            picView.layer.masksToBounds = true
+        }
     }
 }

@@ -69,7 +69,7 @@ class FriendTableViewCell: UITableViewCell {
         ])
     }
     
-    func setup(firstName: String, lastName: String, online: Int8) {
+    func setup(firstName: String, lastName: String, online: Int8, photo_50: String) {
         nameLabel.text = "\(firstName) \(lastName)"
         
         if (online == 1) {
@@ -78,6 +78,12 @@ class FriendTableViewCell: UITableViewCell {
         } else {
             onlineLabel.text = "Offline"
             onlineLabel.textColor = .red
+        }
+        let url = URL(string: photo_50)
+        if let data = try? Data(contentsOf: url!) {
+            circleView.image = UIImage(data: data)
+            circleView.layer.cornerRadius = circleView.frame.size.width
+            circleView.layer.masksToBounds = true
         }
     }
 

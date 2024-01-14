@@ -14,7 +14,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height))
         imageView.image = UIImage(systemName: "person")
-        imageView.backgroundColor = .white
+//        imageView.backgroundColor = .white
         addSubview(imageView)
     }
     
@@ -25,5 +25,24 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
+    }
+    
+    func setupImage(photoUrl: String) {
+//        if let url = URL(string: photoUrl) {
+//            URLSession.shared.dataTask(with: url) { (data, response, error) in
+//                if let data = data {
+//                    DispatchQueue.main.async {
+//                        self.imageView.image = UIImage(data: data)
+//                    }
+//                }
+//            }
+//        }
+//
+        let url = URL(string: photoUrl)
+        if let data = try? Data(contentsOf: url!) {
+            DispatchQueue.main.async {
+                self.imageView.image = UIImage(data: data)
+            }
+        }
     }
 }
