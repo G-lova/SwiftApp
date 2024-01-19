@@ -69,9 +69,10 @@ class GroupTableViewCell: UITableViewCell {
             stackViewHorizontal.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             stackViewHorizontal.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             stackViewHorizontal.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            picView.widthAnchor.constraint(equalTo: picView.heightAnchor),
             picView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            picView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            picView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            picView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            picView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 
@@ -79,7 +80,6 @@ class GroupTableViewCell: UITableViewCell {
         nameLabel.text = nameGroup
         guard let description = description else { return }
         descriptionLabel.text = description
-//        guard let photo_50 = photo_50 else { return }
         let url = URL(string: photo_50)
         if let data = try? Data(contentsOf: url!) {
             picView.image = UIImage(data: data)

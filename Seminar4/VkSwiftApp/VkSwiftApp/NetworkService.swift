@@ -86,16 +86,4 @@ func getGroupsData(groupCompletion: @escaping ([GroupsItems]) -> Void) {
         }.resume()
     }
     
-    func getPhotoImage(photoUrl: String) {
-        guard let url = URL(string: photoUrl) else {
-            return
-        }
-        URLSession.shared.dataTask(with: url) {(data, response, error) in
-            guard let data = data else {
-                return
-            }
-            print(data)
-        }.resume()
-    }
-    
 }

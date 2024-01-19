@@ -60,12 +60,14 @@ class FriendTableViewCell: UITableViewCell {
         stackViewVertical.translatesAutoresizingMaskIntoConstraints = false
         circleView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackViewVertical.leadingAnchor.constraint(equalTo: circleView.trailingAnchor, constant: 10),
+            stackViewVertical.leadingAnchor.constraint(equalTo: circleView.trailingAnchor),
             stackViewHorizontal.topAnchor.constraint(equalTo: contentView.topAnchor),
             stackViewHorizontal.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             stackViewHorizontal.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             stackViewHorizontal.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            circleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
+            circleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            circleView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            circleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     

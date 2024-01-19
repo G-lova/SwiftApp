@@ -22,6 +22,7 @@ class FriendsViewController: UITableViewController {
         view.backgroundColor = .white
         title = "Friends"
         tabBarItem.title = "Friends"
+        tableView.isScrollEnabled = true
         
         tableView.register(FriendTableViewCell.self, forCellReuseIdentifier: "friendCell")
         
@@ -39,19 +40,19 @@ class FriendsViewController: UITableViewController {
         }
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         friends.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as! FriendTableViewCell
-//        guard let cell = cell as? CustomTableViewCell else {
-//            return UITableViewCell()
-//        }
         let friend = friends[indexPath.row]
         cell.setup(firstName: friend.first_name, lastName: friend.last_name, online: friend.online, photo_50: friend.photo_50)
         return cell
     }
-
 }
 
