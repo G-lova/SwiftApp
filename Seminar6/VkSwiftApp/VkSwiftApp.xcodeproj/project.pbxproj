@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE064B592B70C4EC008359E1 /* FriendsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE064B572B70C4EB008359E1 /* FriendsDataModel.xcdatamodeld */; };
+		CE064B612B70E55F008359E1 /* FriendsModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE064B5D2B70E55E008359E1 /* FriendsModel+CoreDataClass.swift */; };
+		CE064B622B70E55F008359E1 /* FriendsModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE064B5E2B70E55E008359E1 /* FriendsModel+CoreDataProperties.swift */; };
+		CE064B662B70EA2B008359E1 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE064B652B70EA2B008359E1 /* FileCache.swift */; };
 		CE2641242B6BCAE700745BF4 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2641232B6BCAE700745BF4 /* ThemeManager.swift */; };
 		CE2B06492B62649F00C0A998 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2B06482B62649D00C0A998 /* Profile.swift */; };
 		CE41606F2B502B3C00DA4157 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41606E2B502B3C00DA4157 /* FriendTableViewCell.swift */; };
+		CE6C49B72B753F13001D7F5A /* FriendProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C49B62B753F10001D7F5A /* FriendProfileVC.swift */; };
 		CE93AF682B46F61400E0E8E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93AF672B46F61400E0E8E8 /* AppDelegate.swift */; };
 		CE93AF6A2B46F61500E0E8E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93AF692B46F61500E0E8E8 /* SceneDelegate.swift */; };
 		CE93AF6C2B46F61500E0E8E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93AF6B2B46F61500E0E8E8 /* ViewController.swift */; };
@@ -30,9 +35,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE064B582B70C4EC008359E1 /* FriendsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FriendsDataModel.xcdatamodel; sourceTree = "<group>"; };
+		CE064B5D2B70E55E008359E1 /* FriendsModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendsModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CE064B5E2B70E55E008359E1 /* FriendsModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendsModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CE064B652B70EA2B008359E1 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
 		CE2641232B6BCAE700745BF4 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		CE2B06482B62649D00C0A998 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		CE41606E2B502B3C00DA4157 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		CE6C49B62B753F10001D7F5A /* FriendProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileVC.swift; sourceTree = "<group>"; };
 		CE93AF642B46F61400E0E8E8 /* VkSwiftApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VkSwiftApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE93AF672B46F61400E0E8E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE93AF692B46F61500E0E8E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,9 +96,11 @@
 			children = (
 				CE93AF672B46F61400E0E8E8 /* AppDelegate.swift */,
 				CE93AF692B46F61500E0E8E8 /* SceneDelegate.swift */,
+				CE064B572B70C4EB008359E1 /* FriendsDataModel.xcdatamodeld */,
 				CE93AF6B2B46F61500E0E8E8 /* ViewController.swift */,
 				CEDB137C2B6E6AB400532021 /* TabBarController.swift */,
 				CE93AF7C2B46F87100E0E8E8 /* FriendsViewController.swift */,
+				CE6C49B62B753F10001D7F5A /* FriendProfileVC.swift */,
 				CE41606E2B502B3C00DA4157 /* FriendTableViewCell.swift */,
 				CE93AF7F2B47045000E0E8E8 /* GroupsViewController.swift */,
 				CE93AF822B4704AE00E0E8E8 /* GroupTableViewCell.swift */,
@@ -100,6 +112,9 @@
 				CE2B06482B62649D00C0A998 /* Profile.swift */,
 				CE93AF912B4706A300E0E8E8 /* Group.swift */,
 				CE93AF942B4706D900E0E8E8 /* Photo.swift */,
+				CE064B5D2B70E55E008359E1 /* FriendsModel+CoreDataClass.swift */,
+				CE064B5E2B70E55E008359E1 /* FriendsModel+CoreDataProperties.swift */,
+				CE064B652B70EA2B008359E1 /* FileCache.swift */,
 				CE2641232B6BCAE700745BF4 /* ThemeManager.swift */,
 				CEDB13792B6E60D400532021 /* AccessManager.swift */,
 				CE93AF702B46F64300E0E8E8 /* Assets.xcassets */,
@@ -179,11 +194,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE93AF952B4706D900E0E8E8 /* Photo.swift in Sources */,
+				CE6C49B72B753F13001D7F5A /* FriendProfileVC.swift in Sources */,
 				CE2B06492B62649F00C0A998 /* Profile.swift in Sources */,
 				CE93AF922B4706A300E0E8E8 /* Group.swift in Sources */,
 				CEDB137D2B6E6AB400532021 /* TabBarController.swift in Sources */,
+				CE064B622B70E55F008359E1 /* FriendsModel+CoreDataProperties.swift in Sources */,
 				CE93AF7D2B46F87100E0E8E8 /* FriendsViewController.swift in Sources */,
 				CE93AF892B4705B800E0E8E8 /* PhotoCollectionViewCell.swift in Sources */,
+				CE064B592B70C4EC008359E1 /* FriendsDataModel.xcdatamodeld in Sources */,
+				CE064B612B70E55F008359E1 /* FriendsModel+CoreDataClass.swift in Sources */,
 				CEA811342B61180600E4E86A /* ProfileViewController.swift in Sources */,
 				CE93AF6C2B46F61500E0E8E8 /* ViewController.swift in Sources */,
 				CE93AF682B46F61400E0E8E8 /* AppDelegate.swift in Sources */,
@@ -195,6 +214,7 @@
 				CE93AF862B47056100E0E8E8 /* PhotosViewController.swift in Sources */,
 				CE93AF8F2B47065E00E0E8E8 /* Friend.swift in Sources */,
 				CE93AF6A2B46F61500E0E8E8 /* SceneDelegate.swift in Sources */,
+				CE064B662B70EA2B008359E1 /* FileCache.swift in Sources */,
 				CE93AF802B47045000E0E8E8 /* GroupsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,6 +407,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CE064B572B70C4EB008359E1 /* FriendsDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CE064B582B70C4EC008359E1 /* FriendsDataModel.xcdatamodel */,
+			);
+			currentVersion = CE064B582B70C4EC008359E1 /* FriendsDataModel.xcdatamodel */;
+			path = FriendsDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CE93AF5C2B46F61400E0E8E8 /* Project object */;
 }

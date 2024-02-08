@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D5029f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="FriendsModel" representedClassName="FriendsModel" syncable="YES">
+        <attribute name="friendFirstName" attributeType="String"/>
+        <attribute name="friendID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="friendLastName" attributeType="String"/>
+        <attribute name="friendPhoto" attributeType="String"/>
+        <attribute name="isOnline" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="GroupModel" representedClassName="GroupModel" syncable="YES" codeGenerationType="class">
+        <attribute name="groupDescription" optional="YES" attributeType="String"/>
+        <attribute name="groupName" attributeType="String"/>
+        <attribute name="groupPhoto" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="FriendsModel" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="GroupModel" positionX="-54" positionY="18" width="128" height="74"/>
+    </elements>
+</model>
