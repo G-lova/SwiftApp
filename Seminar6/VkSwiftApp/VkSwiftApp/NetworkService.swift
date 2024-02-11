@@ -6,14 +6,14 @@
 //
 
 import Foundation
-//import CoreData
+import CoreData
 
 final class NetworkService {
     
     private let token = AccessManager.shared.token
     private let userID = AccessManager.shared.userID
     
-    let fileCache: FileCache = FileCache()
+    var fileCache: FileCache = FileCache()
         
     func getFriendsData(completion: @escaping ([FriendItems]) -> Void) {
         guard let url = URL(string: "https://api.vk.com/method/friends.get?access_token=\(token)&user_id=\(userID)&fields=first_name,last_name,online,photo_50&v=5.199") else {
@@ -26,8 +26,8 @@ final class NetworkService {
             do {
                 let friends = try JSONDecoder().decode(Friend.self, from: data)
 //                print(friends)
-                completion(friends.response.items)
                 self.fileCache.addFriends(friends: friends.response.items)
+                completion(friends.response.items)
             } catch {
                 print(error)
             }

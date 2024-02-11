@@ -6,9 +6,11 @@
 //
 
 import UIKit
-//import CoreData
+import CoreData
 
-class FriendsViewController: UITableViewController {
+class FriendsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    var fetchedResultsController: NSFetchedResultsController<FriendsModel>!
     
     var networkService = NetworkService()
     
@@ -22,8 +24,10 @@ class FriendsViewController: UITableViewController {
         
         tableView.register(FriendTableViewCell.self, forCellReuseIdentifier: "friendCell")
         
-        setupNetworkService()
+//        setupNetworkService()
+        loadFriendsFromCoreData()
         setupProfileButton()
+        setupRefreshControl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,13 +64,40 @@ class FriendsViewController: UITableViewController {
         navigationController?.pushViewController(profileViewController, animated: false)
     }
     
-    func setupNetworkService() {
+    func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.addSubview(refreshControl)
         
+    }
+    
+    @objc func refreshData() {
+        setupNetworkService()
+    }
+    
+    func setupNetworkService() {
         networkService.getFriendsData() { [weak self] friends in
             self?.friends = friends
+//            self?.loadFriendsFromCoreData()
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
+        }
+    }
+    
+    func loadFriendsFromCoreData() {
+        let fileCache = FileCache()
+        
+        let fetchRequest: NSFetchRequest<FriendsModel> = FriendsModel.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "isOnline", ascending: false)]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: fileCache.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+            tableView.reloadData()
+        } catch {
+            print(error)
         }
     }
     
@@ -87,19 +118,22 @@ class FriendsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        friends.count
+//        friends.count
+        return fetchedResultsController?.sections?[section].numberOfObjects ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as! FriendTableViewCell
-        let friend = friends[indexPath.row]
-        cell.setup(firstName: friend.first_name, lastName: friend.last_name, online: friend.online, photo_50: friend.photo_50)
+//        let friend = friends[indexPath.row]
+        let friend = fetchedResultsController.object(at: indexPath)
+        cell.setup(firstName: friend.friendFirstName, lastName: friend.friendLastName, online: friend.isOnline, photo_50: friend.friendPhoto)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let friendProfileVC = FriendProfileVC()
-        friendProfileVC.userID = String(friends[indexPath.row].id)
+        let friend = fetchedResultsController.object(at: indexPath)
+        friendProfileVC.userID = String(friend.friendID)
         navigationController?.pushViewController(friendProfileVC, animated: true)
     }
 }

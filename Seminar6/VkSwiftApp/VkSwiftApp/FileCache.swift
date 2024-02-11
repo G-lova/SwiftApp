@@ -10,8 +10,8 @@ import CoreData
 
 class FileCache {
     
-    private lazy var persistentContainer: NSPersistentContainer = {
-        let persistentContainer = NSPersistentContainer(name: "FriendsModel")
+    lazy var persistentContainer: NSPersistentContainer = {
+        let persistentContainer = NSPersistentContainer(name: "FriendsDataModel")
         persistentContainer.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error {
                 print(error)
@@ -36,13 +36,21 @@ class FileCache {
     }
     
     func addFriends(friends: [FriendItems]) {
+//        let fetchRequest: NSFetchRequest<FriendsModel> = FriendsModel.fetchRequest()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult> (entityName: "FriendsModel")
-        for friend in friends {
-            fetchRequest.predicate = NSPredicate(format: "friendID = %@", argumentArray: [friend.id])
-            let result = try? persistentContainer.viewContext.fetch(fetchRequest)
-            guard result?.first == nil else {
-                continue
+        let existingFriends = try? persistentContainer.viewContext.fetch(fetchRequest)
+        if let existingFriends = existingFriends {
+            for friend in existingFriends {
+                persistentContainer.viewContext.delete(friend as! NSManagedObject)
             }
+        }
+        
+        for friend in friends {
+//            fetchRequest.predicate = NSPredicate(format: "friendID = %li", argumentArray: [friend.id])
+//            let result = try? persistentContainer.viewContext.fetch(fetchRequest)
+//            guard result?.first == nil else {
+//                continue
+//            }
             
             let friendModel = FriendsModel(context: persistentContainer.viewContext)
             friendModel.friendID = friend.id
@@ -56,7 +64,7 @@ class FileCache {
     
     func fetchFriends() -> [FriendItems] {
         let fetchRequest: NSFetchRequest<FriendsModel> = FriendsModel.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "friendLastName", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "isOnline", ascending: false)]
         guard let friends = try? persistentContainer.viewContext.fetch(fetchRequest) else {
             return []
         }
