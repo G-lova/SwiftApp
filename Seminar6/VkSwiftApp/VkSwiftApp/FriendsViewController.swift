@@ -65,24 +65,34 @@ class FriendsViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     func setupRefreshControl() {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        tableView.addSubview(refreshControl)
-        
+        let dataRefresher: UIRefreshControl = {
+            let refreshControl = UIRefreshControl()
+            refreshControl.attributedTitle = NSAttributedString(string: "Updating...")
+            refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+            return refreshControl
+        }()
+        tableView.refreshControl = dataRefresher
     }
     
     @objc func refreshData() {
         setupNetworkService()
+        tableView.refreshControl?.endRefreshing()
+//        tableView.reloadData()
     }
     
     func setupNetworkService() {
-        networkService.getFriendsData() { [weak self] friends in
+        networkService.getFriendsData(completion: { [weak self] friends in
             self?.friends = friends
-//            self?.loadFriendsFromCoreData()
+            self?.loadFriendsFromCoreData()
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
-        }
+        }, errorHandler: { [weak self] in
+            let friendsUpdatingDate = DateManager.shared.friendsUpdatingDate
+            let alert = UIAlertController(title: "Error", message: "Error to update data. Last update: \(friendsUpdatingDate)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self?.present(alert, animated: true, completion: nil)
+        })
     }
     
     func loadFriendsFromCoreData() {
@@ -95,7 +105,9 @@ class FriendsViewController: UITableViewController, NSFetchedResultsControllerDe
         fetchedResultsController.delegate = self
         do {
             try fetchedResultsController.performFetch()
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         } catch {
             print(error)
         }
@@ -133,7 +145,7 @@ class FriendsViewController: UITableViewController, NSFetchedResultsControllerDe
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let friendProfileVC = FriendProfileVC()
         let friend = fetchedResultsController.object(at: indexPath)
-        friendProfileVC.userID = String(friend.friendID)
+        friendProfileVC.friendID = String(friend.friendID)
         navigationController?.pushViewController(friendProfileVC, animated: true)
     }
 }

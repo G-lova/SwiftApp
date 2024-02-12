@@ -5,7 +5,7 @@
 //  Created by User on 04.01.2024.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 final class NetworkService {
@@ -15,7 +15,7 @@ final class NetworkService {
     
     var fileCache: FileCache = FileCache()
         
-    func getFriendsData(completion: @escaping ([FriendItems]) -> Void) {
+    func getFriendsData(completion: @escaping ([FriendItems]) -> Void, errorHandler: @escaping() -> Void) {
         guard let url = URL(string: "https://api.vk.com/method/friends.get?access_token=\(token)&user_id=\(userID)&fields=first_name,last_name,online,photo_50&v=5.199") else {
             return
         }
@@ -27,8 +27,14 @@ final class NetworkService {
                 let friends = try JSONDecoder().decode(Friend.self, from: data)
 //                print(friends)
                 self.fileCache.addFriends(friends: friends.response.items)
+                
+                let dateManager = DateManager.shared
+                dateManager.friendsUpdatingDate = Date()
+                
                 completion(friends.response.items)
             } catch {
+                errorHandler()
+                
                 print(error)
             }
         }.resume()
@@ -47,7 +53,8 @@ func getGroupsData(groupCompletion: @escaping ([GroupsItems]) -> Void) {
 //            }
         do {
             let groups = try JSONDecoder().decode(Group.self, from: data)
-            print(groups)
+//            print(groups)
+            self.fileCache.addGroups(groups: groups.response.items)
             groupCompletion(groups.response.items)
             
         } catch {

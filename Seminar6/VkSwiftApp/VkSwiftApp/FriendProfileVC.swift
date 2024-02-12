@@ -9,7 +9,7 @@ import UIKit
 
 class FriendProfileVC: UIViewController {
 
-    var userID: String = ""
+    var friendID: String = ""
     
     var networkService = NetworkService()
     
@@ -28,7 +28,7 @@ class FriendProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Profile"
+        title = "FriendProfile"
         setupViews()
         setupNetworkService()
                        
@@ -46,13 +46,14 @@ class FriendProfileVC: UIViewController {
         profilePhoto.layer.cornerRadius = profilePhoto.frame.size.width / 2
         profilePhoto.layer.masksToBounds = true
         view.addSubview(nameLabel)
+        setupConstraints()
     }
     
     private func setupConstraints() {
         profilePhoto.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            profilePhoto.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            profilePhoto.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             profilePhoto.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             profilePhoto.widthAnchor.constraint(equalToConstant: 150),
             profilePhoto.heightAnchor.constraint(equalToConstant: 150),
@@ -62,7 +63,7 @@ class FriendProfileVC: UIViewController {
     }
     
     func setupNetworkService() {
-        networkService.getProfileData(userID: userID) { [weak self] profile in
+        networkService.getProfileData(userID: friendID) { [weak self] profile in
             self?.profile = profile
             DispatchQueue.main.async {
                 let url = URL(string: profile[0].photo_200)

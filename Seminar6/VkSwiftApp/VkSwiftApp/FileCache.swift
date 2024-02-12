@@ -46,12 +46,6 @@ class FileCache {
         }
         
         for friend in friends {
-//            fetchRequest.predicate = NSPredicate(format: "friendID = %li", argumentArray: [friend.id])
-//            let result = try? persistentContainer.viewContext.fetch(fetchRequest)
-//            guard result?.first == nil else {
-//                continue
-//            }
-            
             let friendModel = FriendsModel(context: persistentContainer.viewContext)
             friendModel.friendID = friend.id
             friendModel.friendFirstName = friend.first_name
@@ -73,5 +67,40 @@ class FileCache {
             newFriends.append(FriendItems(id: friend.friendID, online: friend.isOnline, first_name: friend.friendFirstName, last_name: friend.friendLastName, photo_50: friend.friendPhoto))
         }
         return newFriends
+    }
+    
+    func addGroups(groups: [GroupsItems]) {
+//        let fetchRequest: NSFetchRequest<FriendsModel> = FriendsModel.fetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult> (entityName: "GroupModel")
+        let existingGroups = try? persistentContainer.viewContext.fetch(fetchRequest)
+        if let existingGroups = existingGroups {
+            for group in existingGroups {
+                persistentContainer.viewContext.delete(group as! NSManagedObject)
+            }
+        }
+        
+        for group in groups {
+            let groupModel = GroupModel(context: persistentContainer.viewContext)
+            groupModel.groupName = group.name
+            groupModel.groupDescription = group.description
+            groupModel.groupPhoto = group.photo_50
+        }
+        save()
+    }
+    
+    func fetchGroups() -> [GroupsItems] {
+        let fetchRequest: NSFetchRequest<GroupModel> = GroupModel.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "groupName", ascending: true)]
+        guard let groups = try? persistentContainer.viewContext.fetch(fetchRequest) else {
+            return []
+        }
+        var newGroups: [GroupsItems] = []
+        for group in groups {
+            guard let description = group.groupDescription else {
+                continue
+            }
+            newGroups.append(GroupsItems(name: group.groupName, description: description, photo_50: group.groupPhoto))
+        }
+        return newGroups
     }
 }

@@ -30,6 +30,9 @@
 		CE93AF922B4706A300E0E8E8 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93AF912B4706A300E0E8E8 /* Group.swift */; };
 		CE93AF952B4706D900E0E8E8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93AF942B4706D900E0E8E8 /* Photo.swift */; };
 		CEA811342B61180600E4E86A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA811332B61180500E4E86A /* ProfileViewController.swift */; };
+		CEB6FC9D2B7A1CBE003C0CD5 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6FC9C2B7A1CBE003C0CD5 /* DateManager.swift */; };
+		CEB6FCA32B7A33EF003C0CD5 /* GroupModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6FCA12B7A33EE003C0CD5 /* GroupModel+CoreDataClass.swift */; };
+		CEB6FCA42B7A33F0003C0CD5 /* GroupModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6FCA22B7A33EE003C0CD5 /* GroupModel+CoreDataProperties.swift */; };
 		CEDB137A2B6E60D600532021 /* AccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB13792B6E60D400532021 /* AccessManager.swift */; };
 		CEDB137D2B6E6AB400532021 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB137C2B6E6AB400532021 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +63,9 @@
 		CE93AF912B4706A300E0E8E8 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		CE93AF942B4706D900E0E8E8 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		CEA811332B61180500E4E86A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CEB6FC9C2B7A1CBE003C0CD5 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		CEB6FCA12B7A33EE003C0CD5 /* GroupModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CEB6FCA22B7A33EE003C0CD5 /* GroupModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CEDB13792B6E60D400532021 /* AccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessManager.swift; sourceTree = "<group>"; };
 		CEDB137C2B6E6AB400532021 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,7 +102,6 @@
 			children = (
 				CE93AF672B46F61400E0E8E8 /* AppDelegate.swift */,
 				CE93AF692B46F61500E0E8E8 /* SceneDelegate.swift */,
-				CE064B572B70C4EB008359E1 /* FriendsDataModel.xcdatamodeld */,
 				CE93AF6B2B46F61500E0E8E8 /* ViewController.swift */,
 				CEDB137C2B6E6AB400532021 /* TabBarController.swift */,
 				CE93AF7C2B46F87100E0E8E8 /* FriendsViewController.swift */,
@@ -112,11 +117,15 @@
 				CE2B06482B62649D00C0A998 /* Profile.swift */,
 				CE93AF912B4706A300E0E8E8 /* Group.swift */,
 				CE93AF942B4706D900E0E8E8 /* Photo.swift */,
+				CE064B572B70C4EB008359E1 /* FriendsDataModel.xcdatamodeld */,
 				CE064B5D2B70E55E008359E1 /* FriendsModel+CoreDataClass.swift */,
 				CE064B5E2B70E55E008359E1 /* FriendsModel+CoreDataProperties.swift */,
+				CEB6FCA12B7A33EE003C0CD5 /* GroupModel+CoreDataClass.swift */,
+				CEB6FCA22B7A33EE003C0CD5 /* GroupModel+CoreDataProperties.swift */,
 				CE064B652B70EA2B008359E1 /* FileCache.swift */,
 				CE2641232B6BCAE700745BF4 /* ThemeManager.swift */,
 				CEDB13792B6E60D400532021 /* AccessManager.swift */,
+				CEB6FC9C2B7A1CBE003C0CD5 /* DateManager.swift */,
 				CE93AF702B46F64300E0E8E8 /* Assets.xcassets */,
 				CE93AF722B46F64300E0E8E8 /* LaunchScreen.storyboard */,
 				CE93AF752B46F64300E0E8E8 /* Info.plist */,
@@ -203,13 +212,16 @@
 				CE93AF892B4705B800E0E8E8 /* PhotoCollectionViewCell.swift in Sources */,
 				CE064B592B70C4EC008359E1 /* FriendsDataModel.xcdatamodeld in Sources */,
 				CE064B612B70E55F008359E1 /* FriendsModel+CoreDataClass.swift in Sources */,
+				CEB6FCA32B7A33EF003C0CD5 /* GroupModel+CoreDataClass.swift in Sources */,
 				CEA811342B61180600E4E86A /* ProfileViewController.swift in Sources */,
 				CE93AF6C2B46F61500E0E8E8 /* ViewController.swift in Sources */,
 				CE93AF682B46F61400E0E8E8 /* AppDelegate.swift in Sources */,
+				CEB6FC9D2B7A1CBE003C0CD5 /* DateManager.swift in Sources */,
 				CE93AF8C2B47061300E0E8E8 /* NetworkService.swift in Sources */,
 				CE41606F2B502B3C00DA4157 /* FriendTableViewCell.swift in Sources */,
 				CE93AF832B4704AE00E0E8E8 /* GroupTableViewCell.swift in Sources */,
 				CE2641242B6BCAE700745BF4 /* ThemeManager.swift in Sources */,
+				CEB6FCA42B7A33F0003C0CD5 /* GroupModel+CoreDataProperties.swift in Sources */,
 				CEDB137A2B6E60D600532021 /* AccessManager.swift in Sources */,
 				CE93AF862B47056100E0E8E8 /* PhotosViewController.swift in Sources */,
 				CE93AF8F2B47065E00E0E8E8 /* Friend.swift in Sources */,

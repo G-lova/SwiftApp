@@ -7,7 +7,7 @@
         <attribute name="friendPhoto" attributeType="String"/>
         <attribute name="isOnline" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="GroupModel" representedClassName="GroupModel" syncable="YES" codeGenerationType="class">
+    <entity name="GroupModel" representedClassName="GroupModel" syncable="YES">
         <attribute name="groupDescription" optional="YES" attributeType="String"/>
         <attribute name="groupName" attributeType="String"/>
         <attribute name="groupPhoto" attributeType="String"/>

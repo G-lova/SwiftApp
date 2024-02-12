@@ -95,7 +95,7 @@ class ProfileViewController: UIViewController {
         darkThemeButton.translatesAutoresizingMaskIntoConstraints = false
         customThemeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            profilePhoto.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            profilePhoto.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             profilePhoto.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             profilePhoto.widthAnchor.constraint(equalToConstant: 150),
             profilePhoto.heightAnchor.constraint(equalToConstant: 150),
