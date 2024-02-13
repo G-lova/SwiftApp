@@ -24,7 +24,6 @@ class FriendsViewController: UITableViewController, NSFetchedResultsControllerDe
         
         tableView.register(FriendTableViewCell.self, forCellReuseIdentifier: "friendCell")
         
-//        setupNetworkService()
         loadFriendsFromCoreData()
         setupProfileButton()
         setupRefreshControl()
@@ -33,6 +32,12 @@ class FriendsViewController: UITableViewController, NSFetchedResultsControllerDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         applyCurrentTheme()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNetworkService()
+        
     }
     
     func setupProfileButton() {
