@@ -8,7 +8,17 @@
 import UIKit
 import CoreData
 
-final class NetworkService {
+protocol NetworkServiceProtocol {
+    func getFriendsData(completion: @escaping ([FriendItems]) -> Void, errorHandler: @escaping() -> Void)
+    
+    func getGroupsData(groupCompletion: @escaping ([GroupsItems]) -> Void)
+    
+    func getPhotosData(photoCompletion: @escaping ([UIImage]) -> Void)
+    
+    func getProfileData(userID: String, completion: @escaping ([ProfileItems]) -> Void)
+}
+
+final class NetworkService: NetworkServiceProtocol {
     
     private let token = AccessManager.shared.token
     private let userID = AccessManager.shared.userID

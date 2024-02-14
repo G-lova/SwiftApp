@@ -34,7 +34,10 @@
 		CEB6FC9D2B7A1CBE003C0CD5 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6FC9C2B7A1CBE003C0CD5 /* DateManager.swift */; };
 		CEB6FCA32B7A33EF003C0CD5 /* GroupModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6FCA12B7A33EE003C0CD5 /* GroupModel+CoreDataClass.swift */; };
 		CEB6FCA42B7A33F0003C0CD5 /* GroupModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6FCA22B7A33EE003C0CD5 /* GroupModel+CoreDataProperties.swift */; };
-		CED91CF12B7C992A00F9C716 /* VkSwiftAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED91CF02B7C992A00F9C716 /* VkSwiftAppTests.swift */; };
+		CED91CFB2B7CA00B00F9C716 /* FriendsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED91CFA2B7CA00B00F9C716 /* FriendsViewControllerTests.swift */; };
+		CED91D212B7CC7C600F9C716 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED91D202B7CC7C600F9C716 /* NetworkServiceTests.swift */; };
+		CED91D252B7CDACC00F9C716 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED91D242B7CDACC00F9C716 /* URLSessionMock.swift */; };
+		CED91D3D2B7CF04800F9C716 /* FileCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED91D3C2B7CF04800F9C716 /* FileCacheTests.swift */; };
 		CEDB137A2B6E60D600532021 /* AccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB13792B6E60D400532021 /* AccessManager.swift */; };
 		CEDB137D2B6E6AB400532021 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB137C2B6E6AB400532021 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
@@ -81,8 +84,11 @@
 		CEB6FCA12B7A33EE003C0CD5 /* GroupModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CEB6FCA22B7A33EE003C0CD5 /* GroupModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CED91CEE2B7C992A00F9C716 /* VkSwiftAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VkSwiftAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CED91CF02B7C992A00F9C716 /* VkSwiftAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkSwiftAppTests.swift; sourceTree = "<group>"; };
 		CED91CF22B7C992A00F9C716 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CED91CFA2B7CA00B00F9C716 /* FriendsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewControllerTests.swift; sourceTree = "<group>"; };
+		CED91D202B7CC7C600F9C716 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		CED91D242B7CDACC00F9C716 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
+		CED91D3C2B7CF04800F9C716 /* FileCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCacheTests.swift; sourceTree = "<group>"; };
 		CEDB13792B6E60D400532021 /* AccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessManager.swift; sourceTree = "<group>"; };
 		CEDB137C2B6E6AB400532021 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DFE102D9F30F9650E504D776 /* Pods-VkSwiftApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VkSwiftApp.release.xcconfig"; path = "Target Support Files/Pods-VkSwiftApp/Pods-VkSwiftApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -223,8 +229,11 @@
 		CED91CEF2B7C992A00F9C716 /* VkSwiftAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				CED91CF02B7C992A00F9C716 /* VkSwiftAppTests.swift */,
 				CED91CF22B7C992A00F9C716 /* Info.plist */,
+				CED91CFA2B7CA00B00F9C716 /* FriendsViewControllerTests.swift */,
+				CED91D202B7CC7C600F9C716 /* NetworkServiceTests.swift */,
+				CED91D242B7CDACC00F9C716 /* URLSessionMock.swift */,
+				CED91D3C2B7CF04800F9C716 /* FileCacheTests.swift */,
 			);
 			path = VkSwiftAppTests;
 			sourceTree = "<group>";
@@ -406,7 +415,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CED91CF12B7C992A00F9C716 /* VkSwiftAppTests.swift in Sources */,
+				CED91D252B7CDACC00F9C716 /* URLSessionMock.swift in Sources */,
+				CED91D212B7CC7C600F9C716 /* NetworkServiceTests.swift in Sources */,
+				CED91D3D2B7CF04800F9C716 /* FileCacheTests.swift in Sources */,
+				CED91CFB2B7CA00B00F9C716 /* FriendsViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
