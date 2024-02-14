@@ -35,7 +35,7 @@ class GroupsViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupNetworkService()
+//        setupNetworkService()
     }
     
     //MARK: - View Settings Methods

@@ -10,7 +10,7 @@ import CoreData
 
 class FriendsViewController: UITableViewController {
     
-    let fileCache = FileCache()
+    var fileCache = FileCache()
     var fetchedResultsController: NSFetchedResultsController<FriendsModel>!
     var networkService = NetworkService()
     

@@ -12,6 +12,7 @@ import CoreData
 class FriendsViewControllerTests: XCTestCase {
     
     var sut: FriendsViewController!
+    
 
     override func setUp() {
         super.setUp()
@@ -32,11 +33,17 @@ class FriendsViewControllerTests: XCTestCase {
     }
 
     func testProfileButtonTappedNavigation()  {
-//        let profileButton = UIButton()
-        
         sut.profileButtonTapped()
         
         XCTAssertTrue(sut.navigationController?.view.layer.animation(forKey: "CATransition") != nil)
+    }
+    
+    func testLoadFriendsFromCoreDataCalled() {
+        let fileCacheSpy = FileCacheSpy()
+        sut.fileCache = fileCacheSpy
+        sut.setupLoadFriendsFromCoreData()
+        
+        XCTAssertTrue(fileCacheSpy.isCalled)
     }
     
     func testNumberOfSection() {
