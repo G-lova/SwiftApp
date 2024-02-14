@@ -35,6 +35,8 @@ class FileCache {
         save()
     }
     
+    //MARK: - Add Methods
+    
     func addFriends(friends: [FriendItems]) {
 //        let fetchRequest: NSFetchRequest<FriendsModel> = FriendsModel.fetchRequest()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult> (entityName: "FriendsModel")
@@ -56,19 +58,6 @@ class FileCache {
         save()
     }
     
-    func fetchFriends() -> [FriendItems] {
-        let fetchRequest: NSFetchRequest<FriendsModel> = FriendsModel.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "isOnline", ascending: false)]
-        guard let friends = try? persistentContainer.viewContext.fetch(fetchRequest) else {
-            return []
-        }
-        var newFriends: [FriendItems] = []
-        for friend in friends {
-            newFriends.append(FriendItems(id: friend.friendID, online: friend.isOnline, first_name: friend.friendFirstName, last_name: friend.friendLastName, photo_50: friend.friendPhoto))
-        }
-        return newFriends
-    }
-    
     func addGroups(groups: [GroupsItems]) {
 //        let fetchRequest: NSFetchRequest<FriendsModel> = FriendsModel.fetchRequest()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult> (entityName: "GroupModel")
@@ -88,6 +77,21 @@ class FileCache {
         save()
     }
     
+    //MARK: - Fetch Methods
+    
+    func fetchFriends() -> [FriendItems] {
+        let fetchRequest: NSFetchRequest<FriendsModel> = FriendsModel.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "isOnline", ascending: false)]
+        guard let friends = try? persistentContainer.viewContext.fetch(fetchRequest) else {
+            return []
+        }
+        var newFriends: [FriendItems] = []
+        for friend in friends {
+            newFriends.append(FriendItems(id: friend.friendID, online: friend.isOnline, first_name: friend.friendFirstName, last_name: friend.friendLastName, photo_50: friend.friendPhoto))
+        }
+        return newFriends
+    }
+    
     func fetchGroups() -> [GroupsItems] {
         let fetchRequest: NSFetchRequest<GroupModel> = GroupModel.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "groupName", ascending: true)]
@@ -102,5 +106,35 @@ class FileCache {
             newGroups.append(GroupsItems(name: group.groupName, description: description, photo_50: group.groupPhoto))
         }
         return newGroups
+    }
+    
+    //MARK: - Load Methods
+    
+    func loadFriendsFromCoreData(completion: @escaping( NSFetchedResultsController<FriendsModel>) -> Void) {
+        
+        let fetchRequest: NSFetchRequest<FriendsModel> = FriendsModel.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "isOnline", ascending: false)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        do {
+            try fetchedResultsController.performFetch()
+            completion(fetchedResultsController)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func loadGroupsFromCoreData(completion: @escaping( NSFetchedResultsController<GroupModel>) -> Void) {
+        
+        let fetchRequest: NSFetchRequest<GroupModel> = GroupModel.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "groupName", ascending: true)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        do {
+            try fetchedResultsController.performFetch()
+            completion(fetchedResultsController)
+        } catch {
+            print(error)
+        }
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     
-    let imageView = UIImageView()
+    private var imageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,11 +28,9 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         imageView.image = nil
     }
     
-    func setupImage(photo_50: String) {
-        let url = URL(string: photo_50)
-        if let data = try? Data(contentsOf: url!) {
-            self.imageView.image = UIImage(data: data)
-        }
+    func setupImage(image: UIImage) {
+        imageView.image = image
+        
         let theme = ThemeManager.shared.theme
         
         switch theme {

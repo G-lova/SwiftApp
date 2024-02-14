@@ -8,13 +8,16 @@
 import UIKit
 import CoreData
 
-class FriendsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class FriendsViewController: UITableViewController {
     
+    let fileCache = FileCache()
     var fetchedResultsController: NSFetchedResultsController<FriendsModel>!
-    
     var networkService = NetworkService()
     
     var friends: [FriendItems] = []
+    
+    //MARK: - Life Cycle Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,8 +27,7 @@ class FriendsViewController: UITableViewController, NSFetchedResultsControllerDe
         
         tableView.register(FriendTableViewCell.self, forCellReuseIdentifier: "friendCell")
         
-//        setupNetworkService()
-        loadFriendsFromCoreData()
+        setupLoadFriendsFromCoreData()
         setupProfileButton()
         setupRefreshControl()
     }
@@ -34,6 +36,15 @@ class FriendsViewController: UITableViewController, NSFetchedResultsControllerDe
         super.viewWillAppear(animated)
         applyCurrentTheme()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNetworkService()
+    }
+    
+    //MARK: - View Settings Methods
+    
+    //Setup ProfileButton Method
     
     func setupProfileButton() {
         let profileButton = UIButton(type: .custom)
@@ -64,6 +75,8 @@ class FriendsViewController: UITableViewController, NSFetchedResultsControllerDe
         navigationController?.pushViewController(profileViewController, animated: false)
     }
     
+    // Setup RefreshControl Method
+    
     func setupRefreshControl() {
         let dataRefresher: UIRefreshControl = {
             let refreshControl = UIRefreshControl()
@@ -77,41 +90,9 @@ class FriendsViewController: UITableViewController, NSFetchedResultsControllerDe
     @objc func refreshData() {
         setupNetworkService()
         tableView.refreshControl?.endRefreshing()
-//        tableView.reloadData()
     }
     
-    func setupNetworkService() {
-        networkService.getFriendsData(completion: { [weak self] friends in
-            self?.friends = friends
-            self?.loadFriendsFromCoreData()
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
-        }, errorHandler: { [weak self] in
-            let friendsUpdatingDate = DateManager.shared.friendsUpdatingDate
-            let alert = UIAlertController(title: "Error", message: "Error to update data. Last update: \(friendsUpdatingDate)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self?.present(alert, animated: true, completion: nil)
-        })
-    }
-    
-    func loadFriendsFromCoreData() {
-        let fileCache = FileCache()
-        
-        let fetchRequest: NSFetchRequest<FriendsModel> = FriendsModel.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "isOnline", ascending: false)]
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: fileCache.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchedResultsController.delegate = self
-        do {
-            try fetchedResultsController.performFetch()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        } catch {
-            print(error)
-        }
-    }
+    // Change Vurrent Theme Method
     
     func applyCurrentTheme() {
         let theme = ThemeManager.shared.theme
@@ -124,6 +105,34 @@ class FriendsViewController: UITableViewController, NSFetchedResultsControllerDe
             tableView.backgroundColor = .gray
         }
     }
+    
+    //MARK: - Data Methods
+    
+    func setupNetworkService() {
+        networkService.getFriendsData(completion: { [weak self] friends in
+            self?.friends = friends
+            self?.setupLoadFriendsFromCoreData()
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }, errorHandler: { [weak self] in
+            let friendsUpdatingDate = DateManager.shared.friendsUpdatingDate
+            let alert = UIAlertController(title: "Error", message: "Error to update data. Last update: \(friendsUpdatingDate)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self?.present(alert, animated: true, completion: nil)
+        })
+    }
+    
+    func setupLoadFriendsFromCoreData() {
+        fileCache.loadFriendsFromCoreData() { [weak self] fetchedResultsController in
+            self?.fetchedResultsController = fetchedResultsController
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    //MARK: - TableViewDelegate Methods
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         1

@@ -63,7 +63,7 @@ func getGroupsData(groupCompletion: @escaping ([GroupsItems]) -> Void) {
     }.resume()
 }
     
-    func getPhotosData(photoCompletion: @escaping ([PhotoItems]) -> Void) {
+    func getPhotosData(photoCompletion: @escaping ([UIImage]) -> Void) {
         guard let url = URL(string: "https://api.vk.com/method/photos.get?access_token=\(token)&owner_id=\(userID)&album_id=wall&v=5.199") else {
             return
         }
@@ -79,7 +79,18 @@ func getGroupsData(groupCompletion: @escaping ([GroupsItems]) -> Void) {
             do {
                 let photos = try JSONDecoder().decode(Photo.self, from: data)
                 print(photos)
-                photoCompletion(photos.response.items)
+                
+                var photoImages: [UIImage] = []
+                for item in photos.response.items {
+                    let url = URL(string: item.url)
+                    if let data = try? Data(contentsOf: url!) {
+                        if let image = UIImage(data: data) {
+                            photoImages.append(image)
+                        }
+                    }
+                }
+                photoCompletion(photoImages)
+                
             } catch {
                 print(error)
             }

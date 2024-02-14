@@ -10,11 +10,13 @@ import CoreData
 
 class GroupsViewController: UITableViewController {
     
+    let fileCache = FileCache()
     var fetchedResultsController: NSFetchedResultsController<GroupModel>!
+    var networkService = NetworkService()
     
     var groups: [GroupsItems] = []
     
-    var networkService = NetworkService()
+    // MARK: - Life Cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +24,7 @@ class GroupsViewController: UITableViewController {
         tabBarItem.title = "Groups"
         tableView.register(GroupTableViewCell.self, forCellReuseIdentifier: "groupCell")
         
-//        setupNetworkService()
-        loadGroupsFromCoreData()
+        setupLoadGroupsFromCoreData()
         setupRefreshControl()
     }
     
@@ -31,6 +32,15 @@ class GroupsViewController: UITableViewController {
         super.viewWillAppear(animated)
         applyCurrentTheme()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNetworkService()
+    }
+    
+    //MARK: - View Settings Methods
+    
+    // Setup RefreshControl Method
     
     func setupRefreshControl() {
         let dataRefresher: UIRefreshControl = {
@@ -45,35 +55,9 @@ class GroupsViewController: UITableViewController {
     @objc func refreshData() {
         setupNetworkService()
         tableView.refreshControl?.endRefreshing()
-//        tableView.reloadData()
     }
     
-    func setupNetworkService() {
-        networkService.getGroupsData { [weak self] groups in
-            self?.groups = groups
-            self?.loadGroupsFromCoreData()
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
-        }
-    }
-    
-    func loadGroupsFromCoreData() {
-        let fileCache = FileCache()
-        
-        let fetchRequest: NSFetchRequest<GroupModel> = GroupModel.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "groupName", ascending: true)]
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: fileCache.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        do {
-            try fetchedResultsController.performFetch()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        } catch {
-            print(error)
-        }
-    }
+    // Change Current Theme Method
     
     func applyCurrentTheme() {
         let theme = ThemeManager.shared.theme
@@ -86,8 +70,30 @@ class GroupsViewController: UITableViewController {
             tableView.backgroundColor = .gray
         }
     }
+
+    //MARK: - Data Methods
+
+    func setupNetworkService() {
+        networkService.getGroupsData { [weak self] groups in
+            self?.groups = groups
+            self?.setupLoadGroupsFromCoreData()
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
+
+    func setupLoadGroupsFromCoreData() {
+        fileCache.loadGroupsFromCoreData() { [weak self] fetchedResultsController in
+            self?.fetchedResultsController = fetchedResultsController
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
 }
 
+//MARK: - TableViewDelegate Methods
 
 extension GroupsViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

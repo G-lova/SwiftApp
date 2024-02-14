@@ -26,12 +26,13 @@ class FriendProfileVC: UIViewController {
         return label
     }()
     
+    //MARK: - Life Cycle Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "FriendProfile"
         setupViews()
         setupNetworkService()
-                       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +41,8 @@ class FriendProfileVC: UIViewController {
         let theme: Theme = ThemeManager.shared.theme
         applyCurrentTheme(theme: theme)
     }
+    
+    //MARK: - View Settings Methods
     
     private func setupViews() {
         view.addSubview(profilePhoto)
@@ -62,19 +65,6 @@ class FriendProfileVC: UIViewController {
         ])
     }
     
-    func setupNetworkService() {
-        networkService.getProfileData(userID: friendID) { [weak self] profile in
-            self?.profile = profile
-            DispatchQueue.main.async {
-                let url = URL(string: profile[0].photo_200)
-                if let data = try? Data(contentsOf: url!) {
-                    self?.profilePhoto.image = UIImage(data: data)
-                    self?.nameLabel.text = "\(profile[0].first_name) \(profile[0].last_name)"
-                }
-            }
-        }
-    }
-    
     func applyCurrentTheme(theme: Theme) {
         switch theme {
         case .light:
@@ -88,5 +78,20 @@ class FriendProfileVC: UIViewController {
             nameLabel.textColor = .orange
         }
         ThemeManager.shared.updateTheme()
+    }
+    
+    //MARK: - Data Method
+    
+    func setupNetworkService() {
+        networkService.getProfileData(userID: friendID) { [weak self] profile in
+            self?.profile = profile
+            DispatchQueue.main.async {
+                let url = URL(string: profile[0].photo_200)
+                if let data = try? Data(contentsOf: url!) {
+                    self?.profilePhoto.image = UIImage(data: data)
+                    self?.nameLabel.text = "\(profile[0].first_name) \(profile[0].last_name)"
+                }
+            }
+        }
     }
 }

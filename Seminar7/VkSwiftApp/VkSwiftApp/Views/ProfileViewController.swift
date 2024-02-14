@@ -57,6 +57,8 @@ class ProfileViewController: UIViewController {
         return button
     }()
 
+    //MARK: - Life Cycle Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Profile"
@@ -71,6 +73,8 @@ class ProfileViewController: UIViewController {
         let theme: Theme = ThemeManager.shared.theme
         applyCurrentTheme(theme: theme)
     }
+    
+    //MARK: - View Settings Methods
     
     private func setupViews() {
         view.addSubview(profilePhoto)
@@ -116,20 +120,6 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    func setupNetworkService() {
-        let userID = AccessManager.shared.userID
-        networkService.getProfileData(userID: userID) { [weak self] profile in
-            self?.profile = profile
-            DispatchQueue.main.async {
-                let url = URL(string: profile[0].photo_200)
-                if let data = try? Data(contentsOf: url!) {
-                    self?.profilePhoto.image = UIImage(data: data)
-                    self?.nameLabel.text = "\(profile[0].first_name) \(profile[0].last_name)"
-                }
-            }
-        }
-    }
-    
     @objc func lightThemeSelected() {
         let selectedTheme: Theme = .light
         ThemeManager.shared.theme = selectedTheme
@@ -168,5 +158,20 @@ class ProfileViewController: UIViewController {
         }
         ThemeManager.shared.updateTheme()
     }
-
+    
+    //MARK: - Data Methods
+    
+    func setupNetworkService() {
+        let userID = AccessManager.shared.userID
+        networkService.getProfileData(userID: userID) { [weak self] profile in
+            self?.profile = profile
+            DispatchQueue.main.async {
+                let url = URL(string: profile[0].photo_200)
+                if let data = try? Data(contentsOf: url!) {
+                    self?.profilePhoto.image = UIImage(data: data)
+                    self?.nameLabel.text = "\(profile[0].first_name) \(profile[0].last_name)"
+                }
+            }
+        }
+    }
 }
